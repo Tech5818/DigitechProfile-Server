@@ -6,12 +6,7 @@ const DatabaseName: string = process.env.DatabaseName!;
 const DatabaseOwner: string = process.env.DatabaseOwner!;
 const DatabasePassword: string = process.env.DatabasePassword!;
 
-console.log(DatabaseName, DatabaseOwner, DatabasePassword);
-
-const db = new Sequelize({
-  username: DatabaseOwner,
-  password: DatabasePassword,
-  database: DatabaseName,
+const db = new Sequelize(DatabaseName, DatabaseOwner, DatabasePassword, {
   host: "localhost",
   dialect: "postgres",
   port: 5432,

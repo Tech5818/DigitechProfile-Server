@@ -16,7 +16,6 @@ import dotenv from "dotenv";
 
 import indexRouter from "./routes/index.ts";
 import usersRouter from "./routes/users.ts";
-import db from "./config/db.ts";
 
 const app = express();
 
@@ -50,7 +49,5 @@ app.use("/users", usersRouter);
 //   res.status(err!.status || 500);
 //   res.render("error");
 // });
-
-db.sync();
 
 export default app;

@@ -49,12 +49,9 @@ app.use("/users", usersRouter);
 //   res.status(err!.status || 500);
 //   res.render("error");
 // });
-import mongoose from "mongoose";
 
-const mongo_url = process.env.MONGO_URL;
-export const mongoDB = mongoose
-  .connect(mongo_url!)
-  .then(() => console.log("mongoDB is connect"))
-  .catch(() => console.log("mongoDB is not connected"));
+import { mongoDB } from "./config/db.ts";
+
+mongoDB();
 
 export default app;

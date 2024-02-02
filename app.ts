@@ -16,6 +16,7 @@ import dotenv from "dotenv";
 
 import indexRouter from "./routes/index.ts";
 import usersRouter from "./routes/users.ts";
+import authRouter from "./routes/auth.ts";
 
 const app = express();
 
@@ -56,20 +57,6 @@ mongoDB();
 
 import session from "express-session";
 
-import passport from "passport";
-import { Strategy } from "passport-google-oauth20";
-passport.use(
-  new Strategy(
-    {
-      clientID: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_PASSWORD!,
-      callbackURL: "http://localhost:8000/auth/google/callback",
-    },
-    (accessToken, refrechToken, profile, done) => {
-      return done(null, profile);
-    }
-  )
-);
 app.use(
   session({
     secret: "asdf",
@@ -77,30 +64,9 @@ app.use(
     saveUninitialized: true,
   })
 );
+import passport from "./auth/passportConfig.ts";
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.serializeUser((user, done) => {
-  done(null, user);
-});
-
-passport.deserializeUser((obj, done) => {
-  done(null, obj!);
-});
-
-app.get(
-  "/auth/google",
-  passport.authenticate("google", { scope: ["profile", "email"] })
-);
-app.get(
-  "/auth/google/callback",
-  passport.authenticate("google", { failureRedirect: "/" }),
-  (req, res) => {
-    res.redirect("/auth/access");
-  }
-);
-
-app.get("/auth/access", (req, res) => {
-  res.json(req.user);
-});
+app.use("/auth", authRouter);
 export default app;

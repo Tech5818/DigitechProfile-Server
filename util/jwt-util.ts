@@ -13,7 +13,6 @@ export interface JWTRequest extends Request {
 export const authJWT = (req: JWTRequest, res: Response, next: NextFunction) => {
   try {
     const token = req.headers.authorization!.replace("Bearer ", "");
-    console.log(token);
 
     req.decoded = jwt.verify(token, secret_key!);
 

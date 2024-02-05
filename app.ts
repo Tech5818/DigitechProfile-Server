@@ -18,6 +18,7 @@ import indexRouter from "./routes/index.ts";
 import userRouter from "./routes/user.ts";
 import authRouter from "./routes/auth.ts";
 import interestedRouter from "./routes/interested.ts";
+import projectRouter from "./routes/project.ts";
 
 const app = express();
 
@@ -36,6 +37,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 app.use("/user", userRouter);
 app.use("/interested", interestedRouter);
+app.use("/project", projectRouter);
 
 // catch 404 and forward to error handler
 // app.use((req, res, next) => {

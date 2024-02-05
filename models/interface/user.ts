@@ -7,10 +7,10 @@ export interface IUser extends Document {
   email: string;
   major: string;
   grade: number;
-  joinDate: Date;
+  joinDate?: Date;
   skills: string[];
   language: string[];
-  interested: IInterested["_id"];
-  postProject: IProject["_id"][];
-  like: number;
+  interesteds?: IInterested["_id"];
+  postProject?: IProject["_id"][];
+  like?: number;
 }

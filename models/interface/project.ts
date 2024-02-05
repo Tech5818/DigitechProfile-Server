@@ -5,7 +5,7 @@ export interface IProject extends Document {
   title: string;
   desired: string[];
   content: string;
-  postDate: Date;
+  postDate?: Date;
   author: IUser["_id"];
-  like: number;
+  like?: number;
 }

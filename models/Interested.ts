@@ -1,12 +1,15 @@
-import mongoose, { Schema } from "mongoose";
+import { Schema } from "mongoose";
 import { IInterested } from "./interface/interested";
+import { interested_connection } from "../config/connection";
 
 const interestedSchema: Schema<IInterested> = new Schema({
-  profiles: [{ type: Schema.Types.ObjectId, ref: "User", required: true }],
-  projects: [{ type: Schema.Types.ObjectId, ref: "Project", required: true }],
+  owner: { type: Schema.Types.ObjectId, ref: "User", required: true },
+  profiles: [{ type: Schema.Types.ObjectId, ref: "User" }],
+  projects: [{ type: Schema.Types.ObjectId, ref: "Project" }],
 });
 
-export const Interested = mongoose.model<IInterested>(
+export const Interested = interested_connection.model<IInterested>(
   "Interested",
-  interestedSchema
+  interestedSchema,
+  "interested"
 );

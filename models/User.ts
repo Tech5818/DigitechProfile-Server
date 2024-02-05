@@ -1,23 +1,21 @@
-import mongoose, { Schema } from "mongoose";
+import { user_connection } from "../config/connection";
+import { Schema } from "mongoose";
 import { IUser } from "./interface/user";
 
 const userSchema: Schema<IUser> = new Schema({
   name: { type: String, required: true },
-  email: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
   major: { type: String, required: true },
   grade: { type: Number, required: true },
   joinDate: { type: Date, default: Date.now },
   skills: [{ type: String, required: true }],
   language: [{ type: String, required: true }],
-  interested: {
+  interesteds: {
     type: Schema.Types.ObjectId,
     ref: "Interested",
-    required: true,
   },
-  postProject: [
-    { type: Schema.Types.ObjectId, ref: "Project", required: true },
-  ],
-  like: { type: Number, required: true },
+  postProject: [{ type: Schema.Types.ObjectId, ref: "Project" }],
+  like: { type: Number, default: 0 },
 });
 
-export const User = mongoose.model<IUser>("User", userSchema);
+export const User = user_connection.model<IUser>("User", userSchema);

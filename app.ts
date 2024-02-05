@@ -15,8 +15,9 @@ import logger from "morgan";
 import dotenv from "dotenv";
 
 import indexRouter from "./routes/index.ts";
-import usersRouter from "./routes/users.ts";
+import userRouter from "./routes/user.ts";
 import authRouter from "./routes/auth.ts";
+import interestedRouter from "./routes/interested.ts";
 
 const app = express();
 
@@ -33,7 +34,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
+app.use("/user", userRouter);
+app.use("/interested", interestedRouter);
 
 // catch 404 and forward to error handler
 // app.use((req, res, next) => {
@@ -51,19 +53,12 @@ app.use("/users", usersRouter);
 //   res.render("error");
 // });
 
-import { mongoDB } from "./config/db.ts";
+import * as mongoDB from "./config/db.ts";
 
-mongoDB();
+mongoDB.mongo_user();
+mongoDB.mongo_interested();
+mongoDB.mongo_project();
 
-import session from "express-session";
-
-app.use(
-  session({
-    secret: "asdf",
-    resave: true,
-    saveUninitialized: true,
-  })
-);
 import passport from "./auth/passportConfig.ts";
 app.use(passport.initialize());
 app.use(passport.session());

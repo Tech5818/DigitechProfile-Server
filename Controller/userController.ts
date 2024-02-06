@@ -72,7 +72,7 @@ export const updateUser = async (req: Request, res: Response) => {
       updateData[key as keyof Partial<IUser>] = req.body[key];
     }
 
-    const response = await User.updateOne({ email }, updateData);
+    const response = await User.updateOne({ email }, { $set: updateData });
 
     res.status(200).json({ message: response });
   } catch (error) {

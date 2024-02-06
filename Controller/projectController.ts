@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { User } from "../models/User";
 import { Project } from "../models/Project";
+import { IProject } from "../models/interface/project";
 
 export const createProject = async (req: Request, res: Response) => {
   try {
@@ -55,6 +56,34 @@ export const readAllProject = async (req: Request, res: Response) => {
       return res
         .status(204)
         .json({ message: "프로젝트가 아예 존재하지 않습니다." });
+
+    res.status(200).json(response);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: error });
+  }
+};
+
+export const updateProject = async (req: Request, res: Response) => {
+  try {
+    const { projectId } = req.body;
+
+    const project = await Project.findOne({ _id: projectId });
+    if (project === null)
+      return res
+        .status(400)
+        .json({ message: "해당 ID를 가지는 프로젝트는 존재하지 않습니다." });
+
+    const updateData: Partial<IProject> = {};
+
+    for (const key in req.body) {
+      updateData[key as keyof Partial<IProject>] = req.body[key];
+    }
+
+    const response = await Project.updateOne(
+      { _id: project["_id"] },
+      { $set: updateData }
+    );
 
     res.status(200).json(response);
   } catch (error) {

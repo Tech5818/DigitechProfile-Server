@@ -7,7 +7,8 @@
     "strict": true,
     "skipLibCheck": true,
     "allowImportingTsExtensions": true,
-    "noEmit": true
+    "noEmit": true,
+    "outDir": "./dist"
   },
   "include": ["./app.ts"],
   "exclude": ["node_modules"]

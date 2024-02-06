@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon --exec ts-node ./bin/www"
+    "start": "nodemon --exec ts-node ./bin/www",
+    "build": "tsc -p"
   },
   "dependencies": {
     "@types/express-session": "^1.17.10",

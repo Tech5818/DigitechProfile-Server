@@ -38,6 +38,6 @@ export const generateJwtToken = (user: any) => {
   return jwt.sign(
     { id: user.id, displayName: user.displayName, email: user.emails[0].value },
     secret_key,
-    { expiresIn: "15m" }
+    { expiresIn: "30d" }
   );
 };

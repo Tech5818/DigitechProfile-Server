@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon --exec ts-node ./bin/www",
-    "build": "tsc -p"
+    "build": "tsc"
   },
   "dependencies": {
     "@types/express-session": "^1.17.10",

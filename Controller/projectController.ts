@@ -91,3 +91,48 @@ export const updateProject = async (req: Request, res: Response) => {
     res.status(500).json({ message: error });
   }
 };
+
+export const updateLikeProject = async (req: Request, res: Response) => {
+  try {
+    const { projectId, like } = req.body;
+
+    const project = await Project.findOne({ _id: projectId });
+    if (project === null)
+      return res
+        .status(400)
+        .json({ message: "해당 ID를 가지는 프로젝트는 존재하지 않습니다." });
+
+    const response = await Project.updateOne(
+      { _id: project["_id"] },
+      { $set: { like: like } }
+    );
+
+    res.status(200).json(response);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: error });
+  }
+};
+
+export const deleteProject = async (req: Request, res: Response) => {
+  try {
+    const { projectId } = req.body;
+
+    const project = await Project.findOne({ _id: projectId });
+    if (project === null)
+      return res
+        .status(400)
+        .json({ message: "해당 ID를 가지는 프로젝트는 존재하지 않습니다." });
+    const author = await User.findOne({ _id: project["author"] });
+    await User.updateOne(
+      { _id: author!["_id"] },
+      { $pull: { postProject: project["_id"] } }
+    );
+    const response = await Project.deleteOne({ _id: project["_id"] });
+
+    res.status(200).json(response);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: error });
+  }
+};

@@ -98,7 +98,7 @@ export const deleteUser = async (req: Request, res: Response) => {
   }
 };
 
-export const updateLike = async (req: Request, res: Response) => {
+export const updateLikeUser = async (req: Request, res: Response) => {
   try {
     const { email, like } = req.body;
     const response = await User.updateOne({ email }, { $set: { like: like } });

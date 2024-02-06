@@ -29,7 +29,7 @@ export const createUser = async (req: Request, res: Response) => {
     });
   } catch (error) {
     console.error(error);
-    res.status(400).json({ message: error });
+    res.status(500).json({ message: error });
   }
 };
 
@@ -44,7 +44,7 @@ export const readUser = async (req: Request, res: Response) => {
     res.status(200).json({ data: response });
   } catch (error) {
     console.error(error);
-    res.status(400).json({ message: error });
+    res.status(500).json({ message: error });
   }
 };
 
@@ -57,7 +57,7 @@ export const readAllUser = async (req: Request, res: Response) => {
     res.status(200).json(response);
   } catch (error) {
     console.error(error);
-    res.status(400).json({ message: error });
+    res.status(500).json({ message: error });
   }
 };
 
@@ -77,7 +77,7 @@ export const updateUser = async (req: Request, res: Response) => {
     res.status(200).json({ message: response });
   } catch (error) {
     console.error(error);
-    res.status(400).json({ message: error });
+    res.status(500).json({ message: error });
   }
 };
 
@@ -94,7 +94,7 @@ export const deleteUser = async (req: Request, res: Response) => {
     res.status(200).json({ message: response });
   } catch (error) {
     console.error(error);
-    res.status(400).json({ message: error });
+    res.status(500).json({ message: error });
   }
 };
 
@@ -106,6 +106,6 @@ export const updateLike = async (req: Request, res: Response) => {
     res.status(200).json({ message: response });
   } catch (error) {
     console.error(error);
-    res.status(400).json({ message: error });
+    res.status(500).json({ message: error });
   }
 };

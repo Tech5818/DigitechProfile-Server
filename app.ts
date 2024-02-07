@@ -39,22 +39,6 @@ app.use("/user", userRouter);
 app.use("/interested", interestedRouter);
 app.use("/project", projectRouter);
 
-// catch 404 and forward to error handler
-// app.use((req, res, next) => {
-//   next(createError(404));
-// });
-
-// error handler
-// app.use((err: unknown, req: Request, res: Response, next: NextFunction) => {
-//   // set locals, only providing error in development
-//   res.locals.message = err!.message;
-//   res.locals.error = req.app.get("env") === "development" ? err : {};
-
-//   // render the error page
-//   res.status(err!.status || 500);
-//   res.render("error");
-// });
-
 import * as mongoDB from "./config/db.ts";
 
 mongoDB.mongo_user();
@@ -63,7 +47,6 @@ mongoDB.mongo_project();
 
 import passport from "./auth/passportConfig.ts";
 app.use(passport.initialize());
-app.use(passport.session());
 
 app.use("/auth", authRouter);
 export default app;

@@ -9,6 +9,7 @@ const projectSchema: Schema<IProject> = new Schema({
   postDate: { type: Date, default: Date.now },
   author: { type: Schema.Types.ObjectId, required: true },
   like: { type: Number, default: 0 },
+  thumbnail: { type: String, required: true },
 });
 
 export const Project = project_connection.model<IProject>(

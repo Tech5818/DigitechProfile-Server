@@ -1,6 +1,7 @@
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
 import { config } from "dotenv";
+import { oauthUser } from "./interface/oauth";
 
 config();
 
@@ -34,9 +35,13 @@ export const authJWT = (req: JWTRequest, res: Response, next: NextFunction) => {
   }
 };
 
-export const generateJwtToken = (user: any) => {
+export const generateJwtToken = (user: oauthUser) => {
   return jwt.sign(
-    { id: user.id, displayName: user.displayName, email: user.emails[0].value },
+    {
+      id: user.id,
+      displayName: user.displayName,
+      email: user.emails[0].value,
+    },
     secret_key,
     { expiresIn: "30d" }
   );

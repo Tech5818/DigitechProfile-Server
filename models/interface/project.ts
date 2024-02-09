@@ -8,4 +8,5 @@ export interface IProject extends Document {
   postDate?: Date;
   author: IUser["_id"];
   like?: number;
+  thumbnail?: string;
 }

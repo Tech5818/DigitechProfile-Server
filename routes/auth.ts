@@ -1,8 +1,8 @@
 import express from "express";
 import passport from "../auth/passportConfig";
 import { JWTRequest, authJWT, generateJwtToken } from "../util/jwt-util";
+import { oauthUser } from "../util/interface/oauth";
 const router = express.Router();
-
 router.get(
   "/google",
   passport.authenticate("google", { scope: ["profile", "email"] })
@@ -11,7 +11,9 @@ router.get(
   "/google/callback",
   passport.authenticate("google", { failureRedirect: "/", session: false }),
   (req, res) => {
-    const token = generateJwtToken(req.user);
+    const user = req.user as oauthUser;
+    console.log(req.user);
+    const token = generateJwtToken(user);
     res.json({ token });
   }
 );

@@ -5,7 +5,7 @@ import { IProject } from "../models/interface/project";
 
 export const createProject = async (req: Request, res: Response) => {
   try {
-    const { title, desired, content, authorEmail } = req.body;
+    const { title, desired, content, authorEmail, thumbnail } = req.body;
 
     const user = await User.findOne({ email: authorEmail });
     if (user === null)
@@ -18,6 +18,7 @@ export const createProject = async (req: Request, res: Response) => {
       desired,
       content,
       author: user["_id"],
+      thumbnail,
     };
 
     const project = await Project.create(newProject);

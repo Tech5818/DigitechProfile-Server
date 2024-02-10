@@ -13,4 +13,5 @@ export interface IUser extends Document {
   interesteds?: IInterested["_id"];
   postProject?: IProject["_id"][];
   like?: number;
+  img?: string;
 }

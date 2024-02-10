@@ -16,6 +16,7 @@ const userSchema: Schema<IUser> = new Schema({
   },
   postProject: [{ type: Schema.Types.ObjectId, ref: "Project" }],
   like: { type: Number, default: 0 },
+  img: { type: String, required: true },
 });
 
 export const User = user_connection.model<IUser>("User", userSchema);

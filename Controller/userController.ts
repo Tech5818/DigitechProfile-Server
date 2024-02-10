@@ -5,7 +5,8 @@ import { IUser } from "../models/interface/user";
 
 export const createUser = async (req: Request, res: Response) => {
   try {
-    const { name, email, major, grade, skills, language }: IUser = req.body;
+    const { name, email, major, grade, skills, language, img }: IUser =
+      req.body;
     const userData = {
       name,
       email,
@@ -13,6 +14,7 @@ export const createUser = async (req: Request, res: Response) => {
       grade,
       skills,
       language,
+      img,
     };
     const newUser = await User.create(userData);
     console.log(newUser);

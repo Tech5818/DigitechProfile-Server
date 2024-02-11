@@ -42,7 +42,6 @@ export const generateJwtToken = (user: oauthUser) => {
       displayName: user.displayName,
       email: user.emails[0].value,
     },
-    secret_key,
-    { expiresIn: "30d" }
+    secret_key
   );
 };
